@@ -6,6 +6,7 @@ menu_options = {
     4: 'Exit'
 }
 
+# Create a HashMap to store data
 def create_hashmap(initial_size=8):
     """
     Create a new hash map with given number of buckets.
@@ -17,13 +18,14 @@ def create_hashmap(initial_size=8):
         "buckets": [[] for _ in range(initial_size)]
     }
 
-
+# Hash function to get bucket index
 def hash_key(key, size):
     """
     Convert a key into a bucket index.
     """
     return hash(key) % size
 
+# Function to prompt user for continuation
 def continue_prompt(menu=None):
     if menu is None:
         print("Invalid menu option. Please select a valid option.")
@@ -35,6 +37,7 @@ def continue_prompt(menu=None):
     else:
         return more
 
+# Function to add or update data in the hashmap
 def store_data(key, name):
     bucket_index = hash_key(key, hashmap["size"])
     bucket = hashmap["buckets"][bucket_index]
@@ -47,6 +50,7 @@ def store_data(key, name):
     hashmap["count"] += 1
     print(f"Added entry: ID = {key}, Name = {name}")
 
+# Function to handle input menu to store data
 def input_menu():
     accept_values = continue_prompt(1)
     print(accept_values)
@@ -60,6 +64,7 @@ def input_menu():
             continue
         accept_values = continue_prompt(1)
 
+# Function to handle search menu using key
 def search_menu():
     accept_values = continue_prompt(2)
     while accept_values == 'y':
@@ -76,6 +81,7 @@ def search_menu():
             print("Invalid input. Please enter a valid number for ID.")
         accept_values = continue_prompt(2)
     
+# Function to delete data by key
 def delete_data():
     try:
         key = int(input("Enter ID to delete: "))
@@ -91,6 +97,7 @@ def delete_data():
     except ValueError:
         print("Invalid input. Please enter a valid number for ID.")
 
+# Function to display operations menu
 def operations_menu():
     while True:
         print("\nMenu Options:")
@@ -112,7 +119,7 @@ def operations_menu():
         except ValueError:
             print("Invalid input. Please enter a number corresponding to the menu options.")
 
-
+# Main execution
 if __name__ == "__main__":
     print("Welcome to HashMap CLI")
     create_hashmap()
